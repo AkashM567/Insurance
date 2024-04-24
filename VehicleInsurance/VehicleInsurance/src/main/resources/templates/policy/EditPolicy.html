@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Policy</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 mx-auto rounded border p-4 m-4">
+				<h2 class="text-center mb-5">Edit Policy</h2>
+				<form method="post" enctype="multipart/form-data"
+					th:object="${policyDto}">
+					<input type="hidden" name="id" th:value="${policy.id}">
+					<div class="form-group">
+						<label for="policyNumber">Policy Number:</label> <input
+							type="text" class="form-control" id="policyNumber"
+							name="policyNumber" th:value="${policy.policyNumber}">
+					</div>
+					<div class="form-group">
+						<label for="policyType">Policy Type:</label> <input type="text"
+							class="form-control" id="policyType" name="policyType"
+							th:value="${policy.policyType}">
+					</div>
+					<div class="form-group">
+						<label for="startDate">Start Date:</label> <input type="date"
+							class="form-control" id="startDate" name="startDate"
+							th:value="${policy.startDate}">
+					</div>
+					<div class="form-group">
+						<label for="endDate">End Date:</label> <input type="date"
+							class="form-control" id="endDate" name="endDate"
+							th:value="${policy.endDate}">
+					</div>
+					<div class="form-group">
+						<label for="amount">Amount:</label> <input type="number"
+							class="form-control" id="amount" name="amount"
+							th:value="${policy.amount}">
+					</div>
+					<div class="form-group">
+						<label for="policyholderId">Policyholder:</label> <select
+							class="form-control" id="policyholderId" name="policyholderId">
+							<option th:each="policyHolder : ${policyHolders}"
+								th:value="${policyHolder.id}"
+								th:selected="${policyHolder.id eq policy.policyholder.id}"
+								th:text="${policyHolder.name}"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="agentId">Agent:</label> <select class="form-control"
+							id="agentId" name="agentId">
+							<option value="">Select Agent</option>
+							<option th:each="agent : ${agents}" th:value="${agent.id}"
+								th:selected="${agent.id eq policy.agent.id}"
+								th:text="${agent.name}"></option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary">Update
+						Policy</button>
+				</form>
+			</div>
+</body>
+</html>
